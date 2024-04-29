@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máy lạnh siêu cập vip pro</title>
+    <style>
+        #remote {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+            height: 10rem;
+            width: 5rem;
+        }
+
+        .btn {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        #display {
+            height: 3rem;
+            width: 90%;
+            background-color: #b9b9b9;
+            border: 1px solid #989898;
+            margin: 3px;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        #level1 {
+            display: none;
+        }
+
+        #level2 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1>Máy lạnh siêu cấp vip pro</h1>
+        <img src="maylanh.jpg" width="80%">
+        <h1 id="level1">
+            PHÈO~ PHÈO~ PHÈO~
+        </h1>
+        <h1 id="level2">
+            DÙ~ DÙ~ DÙ~
+        </h1>
+    </div>
+    <div>
+        <div id="remote" style="border: 2px solid black; height: 14rem; width: 5rem;">
+            <button class="btn" id="up">▲</button>
+            <div id="display">28</div>
+            <button class="btn" id="down">▼</button>
+        </div>
+    </div>
+    <audio id="audio" src="sound.mp3" preload="auto"></audio>
+    <audio id="audio1" src="Beep.mp3" preload="auto"></audio>
+
+    <script>
+        var audio = document.getElementById('audio');
+        document.getElementById('up').addEventListener('click', function () {
+            var bip = document.getElementById('audio1');
+            bip.play();
+            var display = document.getElementById('display');
+            var currentValue = parseInt(display.innerText);
+            if (currentValue > 30) {
+                display.innerText = currentValue;
+            } else if (currentValue <= 25 && currentValue > 20) {
+                audio.play();
+                document.getElementById('level1').style.display = 'block';
+                document.getElementById('level2').style.display = 'none';
+            } else if (currentValue <= 20) {
+                document.getElementById('level2').style.display = 'block';
+            } else {
+                document.getElementById('level2').style.display = 'none';
+                document.getElementById('level1').style.display = 'none';
+                audio.pause();
+            }
+            display.innerText = currentValue + 1;
+        });
+
+        document.getElementById('down').addEventListener('click', function () {
+            var bip = document.getElementById('audio1');
+            bip.play();
+            var display = document.getElementById('display');
+            var currentValue = parseInt(display.innerText);
+            if (currentValue <= 25 && currentValue > 20) {
+                audio.play();
+                document.getElementById('level1').style.display = 'block';
+                document.getElementById('level2').style.display = 'none';
+            } else if (currentValue <= 20) {
+                document.getElementById('level2').style.display = 'block';
+            } else {
+                audio.pause();
+                document.getElementById('level2').style.display = 'none';
+                document.getElementById('level1').style.display = 'none';
+            }
+            display.innerText = currentValue - 1;
+        });
+    </script>
+</body>
+
+</html>
